@@ -7,6 +7,14 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace MadsKristensen.OpenCommandLine
 {
+    // Install-Package Microsoft.VisualStudio.Language.Intellisense -Version 12.0.21005
+    
+//PM> Install-Package Microsoft.VisualStudio.Language.Intellisense -Version 12.0.21005
+//Attempting to resolve dependency 'Microsoft.VisualStudio.Text.UI (≥ 12.0.21005)'.
+//Attempting to resolve dependency 'Microsoft.VisualStudio.Text.Data (≥ 12.0.21005)'.
+//Attempting to resolve dependency 'Microsoft.VisualStudio.CoreUtility (≥ 12.0.21005)'.
+//Attempting to resolve dependency 'Microsoft.VisualStudio.Text.Logic (≥ 12.0.21005)'.
+
     [Export(typeof(IIntellisenseControllerProvider))]
     [Name("Cmd QuickInfo Controller")]
     [ContentType(CmdContentTypeDefinition.CmdContentType)]

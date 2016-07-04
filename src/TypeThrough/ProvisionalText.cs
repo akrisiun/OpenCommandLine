@@ -12,6 +12,8 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace MadsKristensen.OpenCommandLine
 {
+
+#if true // VS14
     [Export(typeof(IWpfTextViewCreationListener))]
     [ContentType(CmdContentTypeDefinition.CmdContentType)]
     [TextViewRole(PredefinedTextViewRoles.Document)]
@@ -30,6 +32,8 @@ namespace MadsKristensen.OpenCommandLine
         }
     }
 
+#endif
+
     public class ProvisionalText
     {
         public static bool IgnoreChange { get; set; }
@@ -38,8 +42,10 @@ namespace MadsKristensen.OpenCommandLine
         public char ProvisionalChar { get; private set; }
         public ITrackingSpan TrackingSpan { get; private set; }
 
+#if true
         private ITextView _textView;
         private readonly IAdornmentLayer _layer;
+#endif
         private Path _highlightAdornment;
         private readonly Brush _highlightBrush;
         private bool _overtype = false;
@@ -48,11 +54,13 @@ namespace MadsKristensen.OpenCommandLine
         private bool _adornmentRemoved = false;
         private IProjectionBuffer _projectionBuffer;
 
-        public ProvisionalText(ITextView textView, Span textSpan)
+        public ProvisionalText(object // ITextView 
+                textView, Span textSpan)
         {
             IgnoreChange = false;
 
-            _textView = textView;
+#if true // VS14
+            _textView = textView as ITextView;
 
             var wpfTextView = (IWpfTextView)_textView;
             _layer = wpfTextView.GetAdornmentLayer(HtmlProvisionalTextHighlightFactory.Name);
@@ -72,13 +80,16 @@ namespace MadsKristensen.OpenCommandLine
             {
                 projectionBuffer.SourceSpansChanged += OnSourceSpansChanged;
             }
+#endif
 
             Color highlightColor = SystemColors.HighlightColor;
             Color baseColor = Color.FromArgb(96, highlightColor.R, highlightColor.G, highlightColor.B);
             _highlightBrush = new SolidColorBrush(baseColor);
 
+#if true // VS14
             ProvisionalChar = snapshot.GetText(provisionalCharSpan)[0];
             HighlightSpan(provisionalCharSpan.Start);
+#endif
         }
 
         public Span CurrentSpan
@@ -91,6 +102,7 @@ namespace MadsKristensen.OpenCommandLine
 
         private void EndTracking()
         {
+#if true // VS14
             if (_textView != null)
             {
                 ClearHighlight();
@@ -116,6 +128,7 @@ namespace MadsKristensen.OpenCommandLine
                 if (OnClose != null)
                     OnClose(this, EventArgs.Empty);
             }
+#endif
         }
 
         public bool IsPositionInSpan(int position)
@@ -219,6 +232,7 @@ namespace MadsKristensen.OpenCommandLine
         {
             ClearHighlight();
 
+#if true // VS14
             var wpfTextView = (IWpfTextView)_textView;
             var snapshotSpan = new SnapshotSpan(wpfTextView.TextBuffer.CurrentSnapshot, new Span(bufferPosition, 1));
 
@@ -236,6 +250,7 @@ namespace MadsKristensen.OpenCommandLine
                     AdornmentPositioningBehavior.TextRelative, snapshotSpan,
                     this, _highlightAdornment, new AdornmentRemovedCallback(OnAdornmentRemoved));
             }
+#endif
         }
 
         private bool _removing = false;
@@ -255,7 +270,9 @@ namespace MadsKristensen.OpenCommandLine
             {
                 _removing = true;
 
+#if true // VS14
                 _layer.RemoveAdornment(_highlightAdornment);
+#endif
                 _highlightAdornment = null;
 
                 _removing = false;

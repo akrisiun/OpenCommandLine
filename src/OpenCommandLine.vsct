@@ -101,7 +101,7 @@
 
     <Symbols>
         <!-- This is the package guid. -->
-        <GuidSymbol name="guidOpenCommandLinePkg" value="{f4ab1e64-5d35-4f06-bad9-bf414f4b3bbb}" />
+        <GuidSymbol name="guidOpenCommandLinePkg" value="{f4ab1e64-5d35-4f06-bad9-bf414f4b3ccc}" />
 
         <GuidSymbol name="guidOpenCommandLineCmdSet" value="{59c8a2ef-e017-4f2d-93ee-ca161749897d}">
             <IDSymbol name="FlyoutMenu" value="0x1000" />

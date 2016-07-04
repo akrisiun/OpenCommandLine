@@ -7,22 +7,30 @@ namespace MadsKristensen.OpenCommandLine
 {
     internal class QuickInfoController : IIntellisenseController
     {
+//#if VS14
         private ITextView _textView;
         private IList<ITextBuffer> _subjectBuffers;
         private QuickInfoControllerProvider _provider;
         private IQuickInfoSession _session;
 
-        internal QuickInfoController(ITextView textView, IList<ITextBuffer> subjectBuffers, QuickInfoControllerProvider provider)
+        public QuickInfoController() : this(null, null, null)
         {
-            _textView = textView;
+        }
+
+        
+        internal QuickInfoController(
+                ITextView  textView
+                , IList<ITextBuffer> subjectBuffers, QuickInfoControllerProvider provider)
+        {
+            _textView = textView as ITextView;
+            _textView.MouseHover += this.OnTextViewMouseHover;
             _subjectBuffers = subjectBuffers;
             _provider = provider;
-
-            _textView.MouseHover += this.OnTextViewMouseHover;
         }
 
         private void OnTextViewMouseHover(object sender, MouseHoverEventArgs e)
         {
+#if true // VS14
             //find the mouse position by mapping down to the subject buffer
             SnapshotPoint? point = _textView.BufferGraph.MapDownToFirstMatch
                  (new SnapshotPoint(_textView.TextSnapshot, e.Position),
@@ -40,6 +48,8 @@ namespace MadsKristensen.OpenCommandLine
                     _session = _provider.QuickInfoBroker.TriggerQuickInfo(_textView, triggerPoint, true);
                 }
             }
+#endif
+
         }
 
         public void Detach(ITextView textView)

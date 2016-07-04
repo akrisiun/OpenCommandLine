@@ -3,11 +3,22 @@ using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
 using Microsoft.VisualStudio.Text.Editor;
 using Microsoft.VisualStudio.Utilities;
+using System.Diagnostics;
+using System;
 
 namespace MadsKristensen.OpenCommandLine
 {
+    //#region Assembly Microsoft.VisualStudio.Text.Logic.dll, v14.0.0.0
+    //// D:\webstack\VSIX\OpenCommandLine\packages\Microsoft.VisualStudio.Text.Logic.14.2.25123\lib\net45\Microsoft.VisualStudio.Text.Logic.dll
+    //#endregion
+
+    // Install-Package Microsoft.VisualStudio.Text.Logic -Version 12.0.21005
+    //    <package id="Microsoft.VisualStudio.Text.Data" version="12.0.21005" targetFramework="net45" />
+    //    <package id="Microsoft.VisualStudio.Text.Logic" version="12.0.21005" targetFramework="net45" />
+
     [Export(typeof(IClassifierProvider))]
     [ContentType(CmdContentTypeDefinition.CmdContentType)]
+//#if VS14    
     [TextViewRole(PredefinedTextViewRoles.Document)]
     public class CmdClassifierProvider : IClassifierProvider
     {
@@ -16,7 +27,20 @@ namespace MadsKristensen.OpenCommandLine
 
         public IClassifier GetClassifier(ITextBuffer textBuffer)
         {
-            return textBuffer.Properties.GetOrCreateSingletonProperty<CmdClassifier>(() => new CmdClassifier(Registry));
+            IClassifier obj = null;
+            try
+            {
+                obj = textBuffer.Properties.GetOrCreateSingletonProperty<CmdClassifier>(() => new CmdClassifier(Registry));
+            }
+            catch (Exception ex) { 
+                if (Debugger.IsAttached)
+                {
+                    Debugger.Log(0, "Error", ex.Message);
+                    Debugger.Break();
+                }
+            }
+
+            return obj;
         }
     }
 }

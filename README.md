@@ -1,4 +1,37 @@
 ## Open Command Line
+
+Error
+
+1115 ERROR System.ComponentModel.Composition.CompositionException: The composition produced a single composition error. 
+The root cause is provided below. Review the CompositionException.Errors property for more detailed information. 1) The export 
+'Microsoft.VisualStudio.Text.Classification.Implementation.ClassificationTypeRegistryService 
+(ContractName="Microsoft.VisualStudio.Text.Classification.IClassificationTypeRegistryService")' is not assignable to type 
+'Microsoft.VisualStudio.Text.Classification.IClassificationTypeRegistryService'. Resulting in: Cannot set import 
+'MadsKristensen.OpenCommandLine.CmdClassifierProvider.Registry (ContractName="Microsoft.VisualStudio.
+Text.Classification.IClassificationTypeRegistryService")' on part 'MadsKristensen.OpenCommandLine.CmdClassifierProvider'.
+ Element: MadsKristensen.OpenCommandLine.CmdClassifierProvider.Registry
+  (ContractName="Microsoft.VisualStudio.Text.Classification.IClassificationTypeRegistryService") --> 
+  MadsKristensen.OpenCommandLine.CmdClassifierProvider Resulting in:
+   Cannot get export 'MadsKristensen.OpenCommandLine.CmdClassifierProvider 
+   (ContractName="Microsoft.VisualStudio.Text.Classification.IClassifierProvider")' 
+   from part 'MadsKristensen.OpenCommandLine.CmdClassifierProvider'. Element: 
+   MadsKristensen.OpenCommandLine.CmdClassifierProvider
+   
+    (ContractName="Microsoft.VisualStudio.Text.Classification.IClassifierProvider") 
+	--> MadsKristensen.OpenCommandLine.CmdClassifierProvider at System.ComponentModel.
+	Composition.Hosting.CompositionServices.GetExportedValueFromComposedPart(
+	   ImportEngine engine, ComposablePart part, ExportDefinition definition) 
+	    at System.ComponentModel.Composition.Hosting.CatalogExportProvider.GetExportedValue(
+			CatalogPart part, ExportDefinition export, Boolean isSharedPart) at System.ComponentModel.
+			Composition.Hosting.CatalogExportProvider.CatalogExport.GetExportedValueCore() 
+	 at System.ComponentModel.Composition.Primitives.Export.get_Value() at System.ComponentModel
+	 .Composition.ExportServices.GetCastedExportedValue[T](Export export) at System.ComponentModel
+	 .Composition.ExportServices.<>c__DisplayClass0`2.<CreateStronglyTypedLazyOfTM>b__2() at System.Lazy`1.CreateValue() 
+	 at System.Lazy`1.LazyInitValue() at System.Lazy`1.get_Value() at Microsoft.VisualStudio.Text.Utilities
+	 .GuardedOperations.InvokeMatchingFactories[TExtensionInstance,TExtensionFactory,TMetadataView](
+	  IEnumerable`1 lazyFactories, Func`2 getter, IContentType dataContentType, Object errorSource) 
+
+
 ### A Visual Studio extension
 
 [![Build status](https://ci.appveyor.com/api/projects/status/1jah71aylecjbkeh?svg=true)](https://ci.appveyor.com/project/madskristensen/opencommandline)

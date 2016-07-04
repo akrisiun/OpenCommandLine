@@ -8,6 +8,9 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace MadsKristensen.OpenCommandLine
 {
+    //IWpfTextView
+    //Install-Package Microsoft.VisualStudio.Text.UI.Wpf -Version 12.0.21005 
+
     internal sealed class CommandFilter : IOleCommandTarget
     {
         private ICompletionSession _currentSession;
