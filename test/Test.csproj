@@ -34,10 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="OpenCommandLine, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\bin\OpenCommandLine.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -54,6 +50,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="LanguageTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\OpenCommandLine12.0.csproj">
+      <Project>{ade3ef15-69c4-48ac-abe1-9c645c992558}</Project>
+      <Name>OpenCommandLine12.0</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -39,7 +39,7 @@ Text.Classification.IClassificationTypeRegistryService")' on part 'MadsKristense
 Download from the
 [Visual Studio Gallery](https://visualstudiogallery.msdn.microsoft.com/4e84e2cf-2d6b-472a-b1e2-b84932511379)
 or get the
-[nightly build](http://vsixgallery.com/extension/f4ab1e64-5d35-4f06-bad9-bf414f4b3bbb/)
+[nightly build](http://vsixgallery.com/extension/f4ab1e64-5d35-4f06-bad9-bf414f4b3ccc/) original: bbb/)
 
 ## Supported consoles
 
